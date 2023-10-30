@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'water/style.css' %}">
+
+{% if properties %}
+    <ul>
+    {% for property in properties %}
+        <li><a href="{% url 'water:property' property.id %}">{{ property.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No properties are available.</p>
+{% endif %}
+
+{% if users %}
+    <ul>
+    {% for u in users %}
+        <li><a href="{% url 'water:user' u.id %}">{{ u.username }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No users available.</p>
+{% endif %}
+
+{% if user.id %} 
+    <p>Sveiks <a href="{% url 'water:user' user.id %}">{{ user.username }}</a>!</p>
+    <a href="/water/logout/">logout</a>
+    <p><a href="/water/property_create/">create property</a></p>
+{% else %}
+    <a href="/water/login/">login</a>
+    <a href="/water/user_create/">register</a>
+{% endif %}
