@@ -3,14 +3,14 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Property, Profile
+from .models import Property, Profile, Residence
 from .forms import PropertyCreateForm, UserCreateForm, LoginForm
 
 
 def index(request):
-    properties = Property.objects.all()
-    users = User.objects.all()
     user = request.user
+    properties = Property.objects.filter(profiles__user__id=user.id)
+    users = User.objects.all()
     context = {"properties": properties, "users":users, "user":user}
     return render(request, "water/index.html", context)
 
@@ -20,7 +20,7 @@ def property(request, property_id):
 
 def property_create(request):
     user = request.user
-    profile = Profile.objects.first()
+    profile = Profile.objects.filter(user_id=user.id).first()
     if request.method == "POST":
         form = PropertyCreateForm(request.POST)
         if form.is_valid():

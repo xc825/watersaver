@@ -23,7 +23,7 @@
     <p>No users available.</p>
 {% endif %}
 
-{% if user.id %} 
+{% if user %} 
     <p>Sveiks <a href="{% url 'water:user' user.id %}">{{ user.username }}</a>!</p>
     <a href="/water/logout/">logout</a>
     <p><a href="/water/property_create/">create property</a></p>

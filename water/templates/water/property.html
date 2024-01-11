@@ -2,6 +2,6 @@
 <p>Users:</p>
 <ul>
 {% for profile in property.profiles.all %}
-    <li><a href="/water/user/{{ user.id }}/">{{ profile.user.username }}</a></li>
+    <li><a href="/water/user/{{ profile.user.id }}/">{{ profile.user.username }}</a></li>
 {% endfor %}
 </ul>
